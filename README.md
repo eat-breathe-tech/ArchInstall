@@ -29,12 +29,11 @@ Partition Disks
 
 Format disks
 
-``
-mkfs.fat -F32 /dev/sda1
+``mkfs.fat -F32 /dev/sda1``
 
-mkswap /dev/sda2
+``mkswap /dev/sda2``
 
-mkfs.ext4 /dev/sda3``
+``mkfs.ext4 /dev/sda3``
 
 Enable the swap partition
 
@@ -45,12 +44,11 @@ Mount the root disk
 ``mount /dev/sda3 /mnt``
 
 Generate a decent mirrorlist
-``pacman -Sy
+``pacman -Sy``
 
-pacman -S reflector
+``pacman -S reflector``
 
-reflector –country United\ States –latest 5 –sort rate –save /etc/pacman.d/mirrorlist
-``
+``reflector –country United\ States –latest 5 –sort rate –save /etc/pacman.d/mirrorlist``
 
 Download initial arch install
 
@@ -64,11 +62,9 @@ Generate an fstab
 
 Copy over new mirrorlist
 
-``
-rm /mnt/etc/pacman.d/mirrorlist
+``rm /mnt/etc/pacman.d/mirrorlist``
 
-cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
-``
+``cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist``
 
 
 Chroot to install directory
@@ -83,25 +79,21 @@ Set the machine hostname
 
 Edit locale
 
-``
-nano /etc/locale.gen
+``nano /etc/locale.gen``
 
-locale-gen
+``locale-gen``
 
-echo LANG=en_US.UTF-8 > /etc/locale.conf
+``echo LANG=en_US.UTF-8 > /etc/locale.conf``
 
-export LANG=en_US.UTF-8
-``
+``export LANG=en_US.UTF-8``
 
 Set timezone
 
-``
-rm /etc/localtime
+``rm /etc/localtime``
 
-ln -s /usr/share/zoneinfo/America/Chicago /etc/localtime
+``ln -s /usr/share/zoneinfo/America/Chicago /etc/localtime``
 
-hwclock --systohc --utc
-``
+``hwclock --systohc --utc``
 
 Update system
 
@@ -133,14 +125,12 @@ Install sudo and update sudoers so new user has sudo privileges
 
 Install and configure bootloader
 
-``
-pacman -S grub efibootmgr dosfstools mtools
+``pacman -S grub efibootmgr dosfstools mtools``
 
-mkdir /boot/EFI
+``mkdir /boot/EFI``
 
-mount /dev/sda1 /boot/EFI
+``mount /dev/sda1 /boot/EFI``
 
-grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck
+``grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck``
 
-grub-mkconfig -o /boot/grub/grub.cfg
-``
+``grub-mkconfig -o /boot/grub/grub.cfg``
